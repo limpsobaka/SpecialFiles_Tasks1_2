@@ -6,17 +6,22 @@ import java.util.List;
 
 public class Main {
   public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
-    //CSV-JSON
+    //CSV->JSON
     String[] columnMapping = {"id", "firstName", "lastName", "country", "age"};
     String fileName = "data.csv";
     List<Employee> list = CSV.parseCSV(columnMapping, fileName);
     String json = JSON.listToJson(list);
     WriteToFile.writeString(json, "data.json");
 
-    //XML-JSON
+    //XML->JSON
     String fileNameXML = "data.xml";
     List<Employee> list2 = XML.parseXML(fileNameXML);
     String json2 = JSON.listToJson(list2);
     WriteToFile.writeString(json2, "data2.json");
+
+    //JSON->Object
+    String fileNameJSON = "data2.json";
+    List<Employee> list3 = JSON.parseJSON(fileNameJSON);
+    list3.forEach(System.out::println);
   }
 }
